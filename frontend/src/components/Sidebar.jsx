@@ -23,12 +23,12 @@ const Sidebar = () => {
 
             <div className="menu-inner-shadow"></div>
 
-            <ul className="menu-inner py-1">
+            <ul className="menu-inner py-1 mt-4 space-y-">
                 <li className="menu-item">
                     <NavLink
                         to="/dashboards/admin"
                         className={({ isActive }) =>
-                            `menu-NavLink d-flex justify-content-between align-items-center mx-2 px-2 py-3 ${isActive ? 'bg-gray-200' : 'bg-white'}`
+                            `menu-NavLink d-flex justify-content-between align-items-center mx-2 px-2 py-3 rounded-lg ${isActive ? 'bg-[#5283E1] text-white' : 'bg-white hover:bg-[#E7E7FF]'}`
                         }
                         style={{ color: 'inherit' }}
                     >
@@ -43,7 +43,7 @@ const Sidebar = () => {
                     <NavLink
                         to="/dashboards/employee"
                         className={({ isActive }) =>
-                            `menu-NavLink d-flex justify-content-between align-items-center mx-2 px-2 py-3 rounded-lg ${isActive ? 'bg-gray-200' : 'bg-white'}`
+                            `menu-NavLink d-flex justify-content-between align-items-center mx-2 px-2 py-3 rounded-lg ${isActive ? 'bg-[#5283E1] text-white' : 'bg-white hover:bg-[#E7E7FF]'}`
                         }
                         style={{ color: 'inherit' }}
                     >

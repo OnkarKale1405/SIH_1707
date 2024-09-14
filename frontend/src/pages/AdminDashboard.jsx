@@ -1,594 +1,227 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from "react";
+import Chart from "react-apexcharts";
 
-function AdminDashboard() {
-  const [attendanceRecords, setAttendanceRecords] = useState([]);
+import building from "../assets/img/building.png"
+import teams from "../assets/img/teams.png"
+import activeEmployee from "../assets/img/activeEmployee.jpg"
+import { BsClockHistory } from "react-icons/bs";
 
-  useEffect(() => {
-    fetchAllAttendanceRecords();
-  }, []);
 
-  const fetchAllAttendanceRecords = async () => {
-    try {
-      const res = await axios.get('http://localhost:5000/api/attendance/all', {
-        headers: { 'x-auth-token': localStorage.getItem('token') }
-      });
-      setAttendanceRecords(res.data);
-    } catch (error) {
-      console.error('Error fetching attendance records:', error);
-    }
+// charts
+import RadialChart from "../components/charts/RadicalChart";
+import MultipleRadicalChart from "../components/charts/MultipleRadicalChart";
+import TimesSeries from "../components/charts/TimesSeries";
+import WorkingHoursChart from "../components/charts/WorkingHoursChart";
+
+const AdminDashboard = () => {
+  const chartOptions = {
+    series: [
+      {
+        name: "On Time Login",
+        data: [20, 25, 30, 28, 35, 40, 38],  // Example data
+      },
+      {
+        name: "On Leave",
+        data: [5, 10, 15, 20, 25, 30, 35],
+      },
+      {
+        name: "Outage",
+        data: [2, 5, 8, 12, 18, 25, 30],
+      }
+    ],
+    options: {
+      chart: {
+        type: 'line',
+        toolbar: {
+          show: false,
+        },
+        zoom: {
+          enabled: false,
+        },
+      },
+      stroke: {
+        curve: 'monotoneCubic',  // Smooth line appearance
+        width: 2,  // Line thickness
+      },
+      markers: {
+        size: 4,  // Marker size
+        colors: ['#00E396'],  // Color of the marker
+        strokeWidth: 2,  // Marker outline width
+        strokeColors: ['#fff'],  // Outline color
+        hover: {
+          size: 8,  // Marker size on hover
+        },
+      },
+      xaxis: {
+        categories: ["01 SEP", "02 SEP", "03 SEP", "04 SEP", "05 SEP", "06 SEP", "07 SEP"],
+        labels: {
+          style: {
+            colors: '#9BA1A6', 
+            fontSize: '10px',  
+          },
+          rotate: -45,
+        },
+        axisBorder: {
+          show: true, 
+        },
+        axisTicks: {
+          show: false,
+        },
+        offsetX: 0,
+      },
+      yaxis: {
+        labels: {
+          style: {
+            colors: '#9BA1A6', 
+            fontSize: '10px',
+            borderType: 'solid'
+          },
+        },
+        axisBorder: {
+          show: true, 
+        },
+        min: 0, 
+        max: 50, 
+        tickAmount: 5,
+      },
+      grid: {
+        show: true, 
+        borderColor: '#F1F3F5', 
+        strokeDashArray: 3,
+        yaxis: {
+          lines: {
+            show: true,
+          },
+        },
+        xaxis: {
+          lines: {
+            show: true, 
+          },
+        },
+      },
+      tooltip: {
+        custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+          return '<div class="px-2 py-1 bg-black text-white">' +
+            '<span>' + series[seriesIndex][dataPointIndex] + '</span>' +
+            '</div>'
+        },
+        marker: {
+          show: false
+        },
+      },
+      colors: ['#00E396'],
+    },
   };
 
+
   return (
-    <div class="container-xxl flex-grow-1 container-p-y">
-      <div class="row">
-        <div class="col-xxl-8 mb-6 order-0">
-          <div class="card">
-            <div class="d-flex align-items-start row">
-              <div class="col-sm-7">
-                <div class="card-body">
-                  <h5 class="card-title text-primary mb-3">Congratulations John! 🎉</h5>
-                  <p class="mb-6">
-                    You have done 72% more sales today.<br />Check your new badge in your profile.
-                  </p>
-
-                  <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a>
-                </div>
-              </div>
-              <div class="col-sm-5 text-center text-sm-left">
-                <div class="card-body pb-0 px-0 px-md-6">
-                  <img
-                    src="../assets/img/illustrations/man-with-laptop.png"
-                    height="175"
-                    class="scaleX-n1-rtl"
-                    alt="View Badge User" />
-                </div>
-              </div>
-            </div>
+    <div className="container mx-auto p-6 bg-gray-100 min-h-screen">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        {/* Total Offices */}
+        <div className="bg-white p-4 rounded-lg shadow-md flex justify-start items-center">
+          <img src={building} alt="Total Offices" className="w-12 h-12 mb-4" />  {/* Office Icon */}
+          <div className="mx-4">
+            <div className="text-4xl font-semibold text-yellow-600">19</div>
+            <div className="text-gray-600">Total Offices</div>
           </div>
         </div>
-        <div class="col-lg-4 col-md-4 order-1">
-          <div class="row">
-            <div class="col-lg-6 col-md-12 col-6 mb-6">
-              <div class="card h-100">
-                <div class="card-body">
-                  <div class="card-title d-flex align-items-start justify-content-between mb-4">
-                    <div class="avatar flex-shrink-0">
-                      <img
-                        src="../assets/img/icons/unicons/chart-success.png"
-                        alt="chart success"
-                        class="rounded" />
-                    </div>
-                    <div class="dropdown">
-                      <button
-                        class="btn p-0"
-                        type="button"
-                        id="cardOpt3"
-                        data-bs-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false">
-                        <i class="bx bx-dots-vertical-rounded text-muted"></i>
-                      </button>
-                      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                        <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mb-1">Profit</p>
-                  <h4 class="card-title mb-3">$12,628</h4>
-                  <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +72.80%</small>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-12 col-6 mb-6">
-              <div class="card h-100">
-                <div class="card-body">
-                  <div class="card-title d-flex align-items-start justify-content-between mb-4">
-                    <div class="avatar flex-shrink-0">
-                      <img
-                        src="../assets/img/icons/unicons/wallet-info.png"
-                        alt="wallet info"
-                        class="rounded" />
-                    </div>
-                    <div class="dropdown">
-                      <button
-                        class="btn p-0"
-                        type="button"
-                        id="cardOpt6"
-                        data-bs-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false">
-                        <i class="bx bx-dots-vertical-rounded text-muted"></i>
-                      </button>
-                      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
-                        <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mb-1">Sales</p>
-                  <h4 class="card-title mb-3">$4,679</h4>
-                  <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
-                </div>
-              </div>
-            </div>
+
+        {/* Total Teams */}
+        <div className="bg-white p-4 rounded-lg shadow-md flex justify-start items-center">
+          <img src={teams} alt="Total Teams" className="w-12 h-12 mb-4" />  {/* Teams Icon */}
+          <div className="mx-4">
+            <div className="text-4xl font-semibold text-red-600">9</div>
+            <div className="text-gray-600">Total Teams</div>
           </div>
         </div>
-        {/* Total Revenue */}
-        <div class="col-12 col-xxl-8 order-2 order-md-3 order-xxl-2 mb-6">
-          <div class="card">
-            <div class="row row-bordered g-0">
-              <div class="col-lg-8">
-                <div class="card-header d-flex align-items-center justify-content-between">
-                  <div class="card-title mb-0">
-                    <h5 class="m-0 me-2">Total Revenue</h5>
-                  </div>
-                  <div class="dropdown">
-                    <button
-                      class="btn p-0"
-                      type="button"
-                      id="totalRevenue"
-                      data-bs-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false">
-                      <i class="bx bx-dots-vertical-rounded bx-lg text-muted"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="totalRevenue">
-                      <a class="dropdown-item" href="javascript:void(0);">Select All</a>
-                      <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-                      <a class="dropdown-item" href="javascript:void(0);">Share</a>
-                    </div>
-                  </div>
-                </div>
-                <div id="totalRevenueChart" class="px-3"></div>
-              </div>
-              <div class="col-lg-4 d-flex align-items-center">
-                <div class="card-body px-xl-9">
-                  <div class="text-center mb-6">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-outline-primary">
-                        <script>
-                          document.write(new Date().getFullYear() - 1);
-                        </script>
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <span class="visually-hidden">Toggle Dropdown</span>
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="javascript:void(0);">2021</a></li>
-                        <li><a class="dropdown-item" href="javascript:void(0);">2020</a></li>
-                        <li><a class="dropdown-item" href="javascript:void(0);">2019</a></li>
-                      </ul>
-                    </div>
-                  </div>
 
-                  <div id="growthChart"></div>
-                  <div class="text-center fw-medium my-6">62% Company Growth</div>
-
-                  <div class="d-flex gap-3 justify-content-between">
-                    <div class="d-flex">
-                      <div class="avatar me-2">
-                        <span class="avatar-initial rounded-2 bg-label-primary"
-                        ><i class="bx bx-dollar bx-lg text-primary"></i
-                        ></span>
-                      </div>
-                      <div class="d-flex flex-column">
-                        <small>
-                          <script>
-                            document.write(new Date().getFullYear() - 1);
-                          </script>
-                        </small>
-                        <h6 class="mb-0">$32.5k</h6>
-                      </div>
-                    </div>
-                    <div class="d-flex">
-                      <div class="avatar me-2">
-                        <span class="avatar-initial rounded-2 bg-label-info"
-                        ><i class="bx bx-wallet bx-lg text-info"></i
-                        ></span>
-                      </div>
-                      <div class="d-flex flex-column">
-                        <small>
-                          <script>
-                            document.write(new Date().getFullYear() - 2);
-                          </script>
-                        </small>
-                        <h6 class="mb-0">$41.2k</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+        {/* Active Employees */}
+        <div className="bg-white p-4 rounded-lg shadow-md flex justify-start items-center">
+          <img src={activeEmployee} alt="Active Employees" className="w-12 h-12 mb-4" />  {/* Employees Icon */}
+          <div className="mx-4">
+            <div className="text-4xl font-semibold text-green-600">44</div>
+            <div className="text-gray-600">Active Employees</div>
           </div>
         </div>
-        {/* Total revenue --> */}
-        <div class="col-12 col-md-8 col-lg-12 col-xxl-4 order-3 order-md-2">
-          <div class="row">
-            <div class="col-6 mb-6">
-              <div class="card h-100">
-                <div class="card-body">
-                  <div class="card-title d-flex align-items-start justify-content-between mb-4">
-                    <div class="avatar flex-shrink-0">
-                      <img src="../assets/img/icons/unicons/paypal.png" alt="paypal" class="rounded" />
-                    </div>
-                    <div class="dropdown">
-                      <button
-                        class="btn p-0"
-                        type="button"
-                        id="cardOpt4"
-                        data-bs-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false">
-                        <i class="bx bx-dots-vertical-rounded text-muted"></i>
-                      </button>
-                      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
-                        <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mb-1">Payments</p>
-                  <h4 class="card-title mb-3">$2,456</h4>
-                  <small class="text-danger fw-medium"><i class="bx bx-down-arrow-alt"></i> -14.82%</small>
-                </div>
-              </div>
-            </div>
-            <div class="col-6 mb-6">
-              <div class="card h-100">
-                <div class="card-body">
-                  <div class="card-title d-flex align-items-start justify-content-between mb-4">
-                    <div class="avatar flex-shrink-0">
-                      <img src="../assets/img/icons/unicons/cc-primary.png" alt="Credit Card" class="rounded" />
-                    </div>
-                    <div class="dropdown">
-                      <button
-                        class="btn p-0"
-                        type="button"
-                        id="cardOpt1"
-                        data-bs-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false">
-                        <i class="bx bx-dots-vertical-rounded text-muted"></i>
-                      </button>
-                      <div class="dropdown-menu" aria-labelledby="cardOpt1">
-                        <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="mb-1">Transactions</p>
-                  <h4 class="card-title mb-3">$14,857</h4>
-                  <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +28.14%</small>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 mb-6">
-              <div class="card">
-                <div class="card-body">
-                  <div class="d-flex justify-content-between align-items-center flex-sm-row flex-column gap-10">
-                    <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
-                      <div class="card-title mb-6">
-                        <h5 class="text-nowrap mb-1">Profile Report</h5>
-                        <span class="badge bg-label-warning">YEAR 2022</span>
-                      </div>
-                      <div class="mt-sm-auto">
-                        <span class="text-success text-nowrap fw-medium"
-                        ><i class="bx bx-up-arrow-alt"></i> 68.2%</span
-                        >
-                        <h4 class="mb-0">$84,686k</h4>
-                      </div>
-                    </div>
-                    <div id="profileReportChart"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+
+        {/* Total Present */}
+        <div className="bg-white p-4 rounded-lg shadow-md flex justify-start items-center">
+          {/* <img src={presentIcon} alt="Total Present" className="w-12 h-12 mb-4" />  Present Icon */}
+          <BsClockHistory className="w-12 h-12 mb-4 text-blue-400" />
+          <div className="mx-4">
+            <div className="text-4xl font-semibold text-blue-600">0</div>
+            <div className="text-gray-600">Total Present</div>
           </div>
         </div>
       </div>
-      <div class="row">
-        {/* Order Statistics  */}
-        <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-6">
-          <div class="card h-100">
-            <div class="card-header d-flex justify-content-between">
-              <div class="card-title mb-0">
-                <h5 class="mb-1 me-2">Order Statistics</h5>
-                <p class="card-subtitle">42.82k Total Sales</p>
-              </div>
-              <div class="dropdown">
-                <button
-                  class="btn text-muted p-0"
-                  type="button"
-                  id="orederStatistics"
-                  data-bs-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false">
-                  <i class="bx bx-dots-vertical-rounded bx-lg"></i>
-                </button>
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="orederStatistics">
-                  <a class="dropdown-item" href="javascript:void(0);">Select All</a>
-                  <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-                  <a class="dropdown-item" href="javascript:void(0);">Share</a>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="d-flex justify-content-between align-items-center mb-6">
-                <div class="d-flex flex-column align-items-center gap-1">
-                  <h3 class="mb-1">8,258</h3>
-                  <small>Total Orders</small>
-                </div>
-                <div id="orderStatisticsChart"></div>
-              </div>
-              <ul class="p-0 m-0">
-                <li class="d-flex align-items-center mb-5">
-                  <div class="avatar flex-shrink-0 me-3">
-                    <span class="avatar-initial rounded bg-label-primary"
-                    ><i class="bx bx-mobile-alt"></i
-                    ></span>
-                  </div>
-                  <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                    <div class="me-2">
-                      <h6 class="mb-0">Electronic</h6>
-                      <small>Mobile, Earbuds, TV</small>
-                    </div>
-                    <div class="user-progress">
-                      <h6 class="mb-0">82.5k</h6>
-                    </div>
-                  </div>
-                </li>
-                <li class="d-flex align-items-center mb-5">
-                  <div class="avatar flex-shrink-0 me-3">
-                    <span class="avatar-initial rounded bg-label-success"><i class="bx bx-closet"></i></span>
-                  </div>
-                  <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                    <div class="me-2">
-                      <h6 class="mb-0">Fashion</h6>
-                      <small>T-shirt, Jeans, Shoes</small>
-                    </div>
-                    <div class="user-progress">
-                      <h6 class="mb-0">23.8k</h6>
-                    </div>
-                  </div>
-                </li>
-                <li class="d-flex align-items-center mb-5">
-                  <div class="avatar flex-shrink-0 me-3">
-                    <span class="avatar-initial rounded bg-label-info"><i class="bx bx-home-alt"></i></span>
-                  </div>
-                  <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                    <div class="me-2">
-                      <h6 class="mb-0">Decor</h6>
-                      <small>Fine Art, Dining</small>
-                    </div>
-                    <div class="user-progress">
-                      <h6 class="mb-0">849k</h6>
-                    </div>
-                  </div>
-                </li>
-                <li class="d-flex align-items-center">
-                  <div class="avatar flex-shrink-0 me-3">
-                    <span class="avatar-initial rounded bg-label-secondary"
-                    ><i class="bx bx-football"></i
-                    ></span>
-                  </div>
-                  <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                    <div class="me-2">
-                      <h6 class="mb-0">Sports</h6>
-                      <small>Football, Cricket Kit</small>
-                    </div>
-                    <div class="user-progress">
-                      <h6 class="mb-0">99</h6>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="card p-6 bg-white shadow-md">
+          <h2 className="text-lg font-semibold">On Time Login</h2>
+          <Chart
+            options={chartOptions.options}
+            series={[chartOptions.series[0]]}
+            type="line"
+            width="100%"
+            height="200px"
+          />
         </div>
-        {/* / Order Statistics */}
+        <div className="card p-6 bg-white shadow-md">
+          <h2 className="text-lg font-semibold">On Leave</h2>
+          <Chart
+            options={chartOptions.options}
+            series={[chartOptions.series[1]]}
+            type="line"
+            width="100%"
+            height="200px"
+          />
+        </div>
+        <div className="card p-6 bg-white shadow-md">
+          <h2 className="text-lg font-semibold">Outage</h2>
+          <Chart
+            options={chartOptions.options}
+            series={[chartOptions.series[2]]}
+            type="line"
+            width="100%"
+            height="200px"
+          />
+        </div>
+      </div>
 
-        {/* Expense Overview */}
-        <div class="col-md-6 col-lg-4 order-1 mb-6">
-          <div class="card h-100">
-            <div class="card-header nav-align-top">
-              <ul class="nav nav-pills" role="tablist">
-                <li class="nav-item">
-                  <button
-                    type="button"
-                    class="nav-link active"
-                    role="tab"
-                    data-bs-toggle="tab"
-                    data-bs-target="#navs-tabs-line-card-income"
-                    aria-controls="navs-tabs-line-card-income"
-                    aria-selected="true">
-                    Income
-                  </button>
-                </li>
-                <li class="nav-item">
-                  <button type="button" class="nav-link" role="tab">Expenses</button>
-                </li>
-                <li class="nav-item">
-                  <button type="button" class="nav-link" role="tab">Profit</button>
-                </li>
-              </ul>
-            </div>
-            <div class="card-body">
-              <div class="tab-content p-0">
-                <div class="tab-pane fade show active" id="navs-tabs-line-card-income" role="tabpanel">
-                  <div class="d-flex mb-6">
-                    <div class="avatar flex-shrink-0 me-3">
-                      <img src="../assets/img/icons/unicons/wallet.png" alt="User" />
-                    </div>
-                    <div>
-                      <p class="mb-0">Total Balance</p>
-                      <div class="d-flex align-items-center">
-                        <h6 class="mb-0 me-1">$459.10</h6>
-                        <small class="text-success fw-medium">
-                          <i class="bx bx-chevron-up bx-lg"></i>
-                          42.9%
-                        </small>
-                      </div>
-                    </div>
-                  </div>
-                  <div id="incomeChart"></div>
-                  <div class="d-flex align-items-center justify-content-center mt-6 gap-3">
-                    <div class="flex-shrink-0">
-                      <div id="expensesOfWeek"></div>
-                    </div>
-                    <div>
-                      <h6 class="mb-0">Income this week</h6>
-                      <small>$39k less than last week</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      {/* Bottom section with circular charts */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+        <div className="p-6 bg-white shadow-md rounded-lg">
+          <h2 className="text-lg font-semibold">On Time Login</h2>
+          <div className="flex items-center justify-center mt-4">
+            <RadialChart value={`44`} />
           </div>
         </div>
-        {/* / Expense Overview */}
+        <div className="p-6 bg-white shadow-md rounded-lg">
+          <h2 className="text-lg font-semibold">On Leave</h2>
+          <div className="flex items-center justify-center mt-4">
+            <RadialChart value={`57`} />
+          </div>
+        </div>
+        <div className="p-6 bg-white shadow-md rounded-lg">
+          <h2 className="text-lg font-semibold">Absent Employees</h2>
+          <div className="flex items-center justify-center mt-4">
+            <MultipleRadicalChart />
+          </div>
+        </div>
+      </div>
 
-        {/* Transactions */}
-        <div class="col-md-6 col-lg-4 order-2 mb-6">
-          <div class="card h-100">
-            <div class="card-header d-flex align-items-center justify-content-between">
-              <h5 class="card-title m-0 me-2">Transactions</h5>
-              <div class="dropdown">
-                <button
-                  class="btn text-muted p-0"
-                  type="button"
-                  id="transactionID"
-                  data-bs-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false">
-                  <i class="bx bx-dots-vertical-rounded bx-lg"></i>
-                </button>
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
-                  <a class="dropdown-item" href="javascript:void(0);">Last 28 Days</a>
-                  <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
-                  <a class="dropdown-item" href="javascript:void(0);">Last Year</a>
-                </div>
-              </div>
-            </div>
-            <div class="card-body pt-4">
-              <ul class="p-0 m-0">
-                <li class="d-flex align-items-center mb-6">
-                  <div class="avatar flex-shrink-0 me-3">
-                    <img src="../assets/img/icons/unicons/paypal.png" alt="User" class="rounded" />
-                  </div>
-                  <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                    <div class="me-2">
-                      <small class="d-block">Paypal</small>
-                      <h6 class="fw-normal mb-0">Send money</h6>
-                    </div>
-                    <div class="user-progress d-flex align-items-center gap-2">
-                      <h6 class="fw-normal mb-0">+82.6</h6>
-                      <span class="text-muted">USD</span>
-                    </div>
-                  </div>
-                </li>
-                <li class="d-flex align-items-center mb-6">
-                  <div class="avatar flex-shrink-0 me-3">
-                    <img src="../assets/img/icons/unicons/wallet.png" alt="User" class="rounded" />
-                  </div>
-                  <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                    <div class="me-2">
-                      <small class="d-block">Wallet</small>
-                      <h6 class="fw-normal mb-0">Mac'D</h6>
-                    </div>
-                    <div class="user-progress d-flex align-items-center gap-2">
-                      <h6 class="fw-normal mb-0">+270.69</h6>
-                      <span class="text-muted">USD</span>
-                    </div>
-                  </div>
-                </li>
-                <li class="d-flex align-items-center mb-6">
-                  <div class="avatar flex-shrink-0 me-3">
-                    <img src="../assets/img/icons/unicons/chart.png" alt="User" class="rounded" />
-                  </div>
-                  <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                    <div class="me-2">
-                      <small class="d-block">Transfer</small>
-                      <h6 class="fw-normal mb-0">Refund</h6>
-                    </div>
-                    <div class="user-progress d-flex align-items-center gap-2">
-                      <h6 class="fw-normal mb-0">+637.91</h6>
-                      <span class="text-muted">USD</span>
-                    </div>
-                  </div>
-                </li>
-                <li class="d-flex align-items-center mb-6">
-                  <div class="avatar flex-shrink-0 me-3">
-                    <img src="../assets/img/icons/unicons/cc-primary.png" alt="User" class="rounded" />
-                  </div>
-                  <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                    <div class="me-2">
-                      <small class="d-block">Credit Card</small>
-                      <h6 class="fw-normal mb-0">Ordered Food</h6>
-                    </div>
-                    <div class="user-progress d-flex align-items-center gap-2">
-                      <h6 class="fw-normal mb-0">-838.71</h6>
-                      <span class="text-muted">USD</span>
-                    </div>
-                  </div>
-                </li>
-                <li class="d-flex align-items-center mb-6">
-                  <div class="avatar flex-shrink-0 me-3">
-                    <img src="../assets/img/icons/unicons/wallet.png" alt="User" class="rounded" />
-                  </div>
-                  <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                    <div class="me-2">
-                      <small class="d-block">Wallet</small>
-                      <h6 class="fw-normal mb-0">Starbucks</h6>
-                    </div>
-                    <div class="user-progress d-flex align-items-center gap-2">
-                      <h6 class="fw-normal mb-0">+203.33</h6>
-                      <span class="text-muted">USD</span>
-                    </div>
-                  </div>
-                </li>
-                <li class="d-flex align-items-center">
-                  <div class="avatar flex-shrink-0 me-3">
-                    <img src="../assets/img/icons/unicons/cc-warning.png" alt="User" class="rounded" />
-                  </div>
-                  <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                    <div class="me-2">
-                      <small class="d-block">Mastercard</small>
-                      <h6 class="fw-normal mb-0">Ordered Food</h6>
-                    </div>
-                    <div class="user-progress d-flex align-items-center gap-2">
-                      <h6 class="fw-normal mb-0">-92.45</h6>
-                      <span class="text-muted">USD</span>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
+      {/* Footer section */}
+      <div className="mt-4">
+        <div className="card bg-white shadow-md">
+          <TimesSeries />
         </div>
-        {/* / Transactions */}
+
+        <div className="card bg-white shadow-md mt-4">
+          <WorkingHoursChart />
+        </div>
+
       </div>
     </div>
   );
-}
-
-{/* <div>
-  <h1>Admin Dashboard</h1>
-  <h2>All Attendance Records</h2>
-  <ul>
-    {attendanceRecords.map((record) => (
-      <li key={record._id}>
-        Employee: {record.user.name},
-        Time: {new Date(record.timestamp).toLocaleString()},
-        Location: {record.location.coordinates.join(', ')}
-      </li>
-    ))}
-  </ul>
-</div> */}
+};
 
 export default AdminDashboard;

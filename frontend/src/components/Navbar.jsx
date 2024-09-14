@@ -1,26 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import { IoSearch } from "react-icons/io5";
+import { IoSearch, IoMenu } from "react-icons/io5";
+
 
 const Navbar = () => {
+
+    const [searchTerm, setSearchTerm] = useState("");
+
     return (
         <nav
             className="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
             id="layout-navbar">
-            <div className="layout-menu-toggle navbar-nav align-items-xl-center me-4 me-xl-0 d-xl-none">
+            {/* <div className="layout-menu-toggle navbar-nav align-items-xl-center me-4 me-xl-0 d-xl-none">
                 <a className="nav-item nav-link px-0 me-xl-6" href="javascript:void(0)">
-                    <i className="bx bx-menu bx-md"></i>
+                    <IoMenu className='bx bx-menu bx-md' />
                 </a>
-            </div>
+            </div> */}
 
             <div className="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
                 {/* Search */}
+                <div>
+                    <IoMenu className='bx bx-menu bx-md text-xl mr-4 cursor-pointer' />
+                </div>
                 <div className="navbar-nav align-items-center">
                     <div className="nav-item d-flex align-items-center">
-                        <IoSearch className='text-xl' />
+                        <IoSearch className='text-2xl' />
                         <input
                             type="text"
                             className="form-control border-0 shadow-none ps-1 ps-sm-2"
+                            value={searchTerm}
+                            onChange={e => setSearchTerm(e.target.value)}
                             placeholder="Search..."
                             aria-label="Search..." />
                     </div>
