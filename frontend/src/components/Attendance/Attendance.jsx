@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MdArrowBackIos, MdArrowForwardIos, MdKeyboardArrowRight } from 'react-icons/md';
 import { FaCalendarAlt } from 'react-icons/fa';
 import { TbClockDown, TbClockShare as TbClockUp, TbClockCheck, TbClockExclamation } from 'react-icons/tb';
@@ -7,13 +7,13 @@ import AttendanceRow from './AttendanceRow';
 
 const Attendance = () => {
     const data = [
-        { date: "Wed, 17 July 2019", clockIn: "09:01", clockOut: "--:--", hours: "--:--", location: null, status: 'arrow-down', color: 'text-blue-500' },
-        { date: "Tue, 16 July 2019", clockIn: "09:50", clockOut: "06:10", hours: "8:20 hr", location: "R&D Office Islamabad", status: 'arrow-down-up', color: 'text-red-500' },
-        { date: "Mon, 15 July 2019", clockIn: "09:50", clockOut: "06:10", hours: "8:20 hr", location: "R&D Office Islamabad", status: 'arrow-down-up', color: 'text-red-500' },
-        { date: "Weekend", clockIn: "Sat, 14 July 2019 & Sun, 13 July 2019", clockOut: "", hours: "", location: null, status: 'weekend', color: '' },
-        { date: "Fri, 12 July 2019", clockIn: "09:01", clockOut: "--:--", hours: "--:--", location: null, status: 'arrow-down', color: 'text-blue-500' },
-        { date: "Thu, 11 July 2019", clockIn: "09:10", clockOut: "06:00", hours: "8:10 hr", location: null, status: 'arrow-down', color: 'text-orange-500' },
-        { date: "Tue, 10 July 2019", clockIn: "09:10", clockOut: "06:10", hours: "8:20 hr", location: "R&D Office Islamabad", status: 'arrow-down-up', color: 'text-blue-500' },
+        { date: "Wed, 17 July 2024", clockIn: "09:01", clockOut: "--:--", hours: "--:--", location: null, status: 'arrow-down', color: 'text-blue-500' },
+        { date: "Tue, 16 July 2024", clockIn: "09:50", clockOut: "06:10", hours: "8:20 hr", location: "R&D Office Islamabad", status: 'arrow-down-up', color: 'text-red-500' },
+        { date: "Mon, 15 July 2024", clockIn: "09:50", clockOut: "06:10", hours: "8:20 hr", location: "R&D Office Islamabad", status: 'arrow-down-up', color: 'text-red-500' },
+        { date: "Weekend", clockIn: "Sat, 14 July 2024 & Sun, 13 July 2024", clockOut: "", hours: "", location: null, status: 'weekend', color: '' },
+        { date: "Fri, 12 July 2024", clockIn: "09:01", clockOut: "--:--", hours: "--:--", location: null, status: 'arrow-down', color: 'text-blue-500' },
+        { date: "Thu, 11 July 2024", clockIn: "09:10", clockOut: "06:00", hours: "8:10 hr", location: null, status: 'arrow-down', color: 'text-orange-500' },
+        { date: "Tue, 10 July 2024", clockIn: "09:10", clockOut: "06:10", hours: "8:20 hr", location: "R&D Office Islamabad", status: 'arrow-down-up', color: 'text-blue-500' },
     ];
 
     const [mobileView, setMobileView] = useState(window.innerWidth < 640);
