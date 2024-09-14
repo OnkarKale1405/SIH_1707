@@ -22,7 +22,8 @@ const ProfileCard = () => {
     }, []);
 
     return (
-        <div className="bg-white flex max-md:flex-row max-md:justify-around max-md:items-center md:flex-col relative px-5 pt-12 rounded-sm shadow-sm border">
+        <div className="bg-white flex max-sm:flex-col max-md:flex-row max-md:justify-around max-md:items-center md:flex-col relative px-5 py-6 rounded-sm shadow-sm border
+        max-sm:text-xs sm:text-xs md:text-base">
             {/* <div className="absolute top-2 right-2 px-6 py-2 bg-[#EBF9EA] text-[#92DF93] text-sm font-semibold rounded-full cursor-pointer">
                 Active
             </div> */}
@@ -30,7 +31,7 @@ const ProfileCard = () => {
                 <img
                     src={EmployeeImg}
                     alt="Profile"
-                    className="rounded-full max-md:w-40 max-md:h-40 md:h-32 md:w-32 mx-auto my-4"
+                    className="rounded-full max-md:w-32 max-md:h-32 md:h-40 md:w-40 mx-auto my-4"
                 />
                 <button className={`bg-[#E4E5EA] text-gray-400 px-3 py-1 rounded-md text-sm font-normal my-4 ${mobileView ? "visible" : "hidden"}`}>Edit Profile</button>
             </div>

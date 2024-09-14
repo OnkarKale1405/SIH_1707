@@ -53,14 +53,14 @@ function EmployeeDashboard() {
         </div>
         <div className="md:col-span-3">
           <div className="rounded-full text-[#C3CACC] shadow-sm">
-            <div className="flex">
-              <button className="bg-[#4783E2] text-white flex-1 px-4 py-2 border sm:rounded-l-md md:rounded-l-full">
+            <div className="flex max-sm:text-xs sm:text-sm md:text-base">
+              <button className="bg-[#4783E2] text-white flex-1 px-4 py-2 border max-md:rounded-l-lg md:rounded-l-full">
                 Attendance
               </button>
               <button className="bg-[#FFFFFF] border flex-1 px-4 py-2">
                 Leave Quota
               </button>
-              <button className="bg-[#FFFFFF] border flex-1 px-4 py-2 sm:rounded-r-md md:rounded-r-full">
+              <button className="bg-[#FFFFFF] border flex-1 px-4 py-2 max-md:rounded-r-lg md:rounded-r-full">
                 Employee Info
               </button>
             </div>
