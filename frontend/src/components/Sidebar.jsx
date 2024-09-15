@@ -12,7 +12,7 @@ const Sidebar = () => {
                 {/* Logo */}
                 <div className='flex items-center gap-4'>
                     <FaFingerprint className="text-blue-500 mx-auto text-4xl" />
-                    <h2 className="text-2xl font-bold mt-2">Company</h2>
+                    <h2 className="text-2xl font-bold mt-2">Workfence</h2>
                 </div>
                 {/* /Logo */}
 
