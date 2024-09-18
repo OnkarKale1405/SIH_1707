@@ -1,43 +1,19 @@
 import React from 'react';
 import ReactApexChart from 'react-apexcharts';
 
-// Function to generate alternating colors for bars
-const generateAlternatingColors = (length, color1, color2) => {
-    const colors = [];
-    for (let i = 0; i < length; i++) {
-        if (Math.floor(i / 2) % 2 === 0) {
-            colors.push(color1);
-        } else {
-            colors.push(color2);
-        }
-    }
-    return colors;
-};
-
 class WorkingHoursChart extends React.Component {
     constructor(props) {
         super(props);
 
-        const numBars = 15; // Number of bars in the chart
-        const color1 = '#A6B9DB';
-        const color2 = '#9AD1B8';
-        const barColors = generateAlternatingColors(numBars, color1, color2);
-        console.log(barColors);
-
         this.state = {
             series: [{
                 name: 'Average Working Hours',
-                type: 'bar',
                 data: [7.5, 8.2, 8.0, 7.8, 8.5, 7.9, 8.3, 8.1, 7.7, 8.4, 8.0, 7.6, 8.2, 8.1, 7.9]
-            }, {
-                name: '8 Hours Line',
-                type: 'line',
-                data: [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8] 
             }],
             options: {
                 chart: {
                     height: 300,
-                    type: 'line',
+                    type: 'bar',
                     toolbar: {
                         show: false,
                     },
@@ -49,24 +25,12 @@ class WorkingHoursChart extends React.Component {
                     bar: {
                         borderRadius: 5,
                         columnWidth: '40%',
-                        colors: {
-                            ranges: barColors.map((color, index) => ({
-                                from: index,
-                                to: index + 1,
-                                color: color
-                            }))
-                        },
-                        hover: {
-                            colors: barColors
-                        }
+                        distributed: true,
                     }
                 },
-                stroke: {
-                    width: [0, 2]
-                },
+                colors: ['url(#blue-purple-gradient)'], // Use only the blue-purple gradient
                 dataLabels: {
                     enabled: false,
-                    enabledOnSeries: [1]
                 },
                 xaxis: {
                     categories: [
@@ -82,18 +46,13 @@ class WorkingHoursChart extends React.Component {
                         show: false,
                     }
                 },
-                yaxis: [{
+                yaxis: {
                     show: false
-                }],
+                },
                 grid: {
                     show: true,
                     borderColor: '#F1F3F5',
                     strokeDashArray: 3,
-                    yaxis: {
-                        lines: {
-                            show: true,
-                        },
-                    },
                     xaxis: {
                         lines: {
                             show: true,
@@ -106,15 +65,12 @@ class WorkingHoursChart extends React.Component {
                             '<span>' + series[seriesIndex][dataPointIndex] + ' hrs</span>' +
                             '</div>'
                     },
-                    followCursor: false,
-                    intersect: false,
-                    onDatasetHover: {
-                        highlightDataSeries: false,
-                    }
                 },
                 annotations: {
                     yaxis: [{
                         y: 8,
+                        strokeDashArray: 0,
+                        borderColor: '#FF4560',
                         label: {
                             text: '8 Hrs',
                             borderColor: 'transparent',
@@ -132,7 +88,8 @@ class WorkingHoursChart extends React.Component {
                 legend: {
                     show: false,
                 }
-            },
+            }
+            
         };
     }
 
@@ -140,15 +97,26 @@ class WorkingHoursChart extends React.Component {
         return (
             <div className='px-8 py-8'>
                 <div id="chart">
-                    <h2 className='text-xl font-semibold'>Average Working Hours</h2>
+                    <h2 className='text-xl font-semibold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent'>Average Working Hours</h2>
                     <ReactApexChart
                         options={this.state.options}
                         series={this.state.series}
-                        type="line"
+                        type="bar"
                         height={300}
                     />
+                    <svg style={{ height: 0 }}>
+                        <defs>
+                            <linearGradient id="blue-purple-gradient" x1="0%" y1="100%" x2="0%" y2="0%">
+                                <stop offset="0%" stopColor="#3b82f6" />
+                                <stop offset="100%" stopColor="#a855f7" />
+                            </linearGradient>
+                            <linearGradient id="red-gradient" x1="0%" y1="100%" x2="0%" y2="0%">
+                                <stop offset="0%" stopColor="#ef4444" />
+                                <stop offset="100%" stopColor="#f87171" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
                 </div>
-                <div id="html-dist"></div>
             </div>
         );
     }

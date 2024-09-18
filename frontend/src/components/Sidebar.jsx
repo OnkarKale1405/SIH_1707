@@ -34,7 +34,7 @@ const Sidebar = () => {
                     >
                         <div className='flex gap-2'>
                             <MdAdminPanelSettings className='text-xl' />
-                            <div className="text-truncate" data-i18n="Dashboards">Admin</div>
+                            <div className="text-truncate" data-i18n="Dashboards">Analytics</div>
                         </div>
                         <IoIosArrowForward />
                     </NavLink>
@@ -49,7 +49,7 @@ const Sidebar = () => {
                     >
                         <div className='flex gap-2'>
                             <CiUser className='text-xl' />
-                            <div className="text-truncate" data-i18n="Dashboards">Employee</div>
+                            <div className="text-truncate" data-i18n="Dashboards">Employee Details</div>
                         </div>
                         <IoIosArrowForward />
                     </NavLink>

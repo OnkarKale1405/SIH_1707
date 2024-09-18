@@ -47,24 +47,18 @@ function EmployeeDashboard() {
       <div className="grid sm:grid-cols-1 md:grid-cols-4 gap-3">
         <div className="sm:col-span-1 max-md:flex max-md:flex-col">
           <ProfileCard />
-          <button className="bg-[#FF8082] text-white px-4 py-2 rounded-sm my-3">
+          {/* <button className="bg-[#FF8082] text-white px-4 py-2 rounded-sm my-3">
             Block Account
-          </button>
+          </button> */}
         </div>
         <div className="md:col-span-3">
-          <div className="rounded-full text-[#C3CACC] shadow-sm">
+          {/* <div className="rounded-full text-[#C3CACC] shadow-sm">
             <div className="flex max-sm:text-xs sm:text-sm md:text-base">
               <button className="bg-[#4783E2] text-white flex-1 px-4 py-2 border max-md:rounded-l-lg md:rounded-l-full">
                 Attendance
               </button>
-              <button className="bg-[#FFFFFF] border flex-1 px-4 py-2">
-                Leave Quota
-              </button>
-              <button className="bg-[#FFFFFF] border flex-1 px-4 py-2 max-md:rounded-r-lg md:rounded-r-full">
-                Employee Info
-              </button>
             </div>
-          </div>
+          </div> */}
           <Attendance />
         </div>
       </div>
@@ -73,17 +67,3 @@ function EmployeeDashboard() {
 }
 
 export default EmployeeDashboard;
-
-{/* <div>
-  <h1>Employee Dashboard</h1>
-  <button onClick={recordAttendance}>Record Attendance</button>
-  <h2>Attendance Records</h2>
-  <ul>
-    {attendanceRecords.map((record) => (
-      <li key={record._id}>
-        Time: {new Date(record.timestamp).toLocaleString()},
-        Location: {record.location.coordinates.join(', ')}
-      </li>
-    ))}
-  </ul>
-</div> */}

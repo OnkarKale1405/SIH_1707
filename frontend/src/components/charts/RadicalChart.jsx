@@ -63,8 +63,22 @@ const RadialChart = ({ value }) => {
       },
     },
     fill: {
-      colors: ['#FDB904'],
+      type: 'gradient',
+      gradient: {
+        shade: 'light',
+        type: 'horizontal',
+        gradientToColors: ['#800080'], // Purple
+        shadeIntensity: 1,
+        inverseColors: false,
+        opacityFrom: 1,
+        opacityTo: 1,
+        stops: [0, 100],
+        colorStops: []
+      },
+      colors: ['#0000FF'], // Blue
     },
+    
+    
     stroke: {
       lineCap: 'round',
     },
