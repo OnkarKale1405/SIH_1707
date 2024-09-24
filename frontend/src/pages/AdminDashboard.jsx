@@ -16,7 +16,7 @@ const GradientCard = ({ icon: Icon, value, label }) => (
   <div className="bg-white p-6 rounded-xl shadow-lg">
     <div className="flex items-center">
       <div className="relative w-12 h-12 mr-4">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full" />
+        <div className="absolute inset-0 bg-blue-600 rounded-full" />
         <div className="absolute inset-0 flex items-center justify-center">
           <Icon className="w-8 h-8 text-white" />
         </div>
@@ -24,7 +24,7 @@ const GradientCard = ({ icon: Icon, value, label }) => (
       
       <div>
         <div
-          className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent"
+          className="text-3xl font-bold bg-blue-600 bg-clip-text text-transparent"
         >
           {value}
         </div>

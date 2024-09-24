@@ -26,7 +26,7 @@ const ProfileCard = ({ employeeData = {} }) => {
           <img
             src={EmployeeImg}
             alt="Profile"
-            className="w-32 h-32 rounded-full border-4 border-blue-500 shadow-md"
+            className="w-32 h-32 rounded-full border-4 border-gray-300 shadow-md"
           />
           <h2 className="mt-4 text-2xl font-bold text-gray-800">
             {employeeData.name || "Shivam"}
@@ -42,11 +42,11 @@ const ProfileCard = ({ employeeData = {} }) => {
                 {employeeData.email || "iammustery@gmail.com"}
               </p>
               <p className="flex items-center text-gray-600">
-                <FaPhoneAlt className="mr-2 text-purple-500" />
+                <FaPhoneAlt className="mr-2 text-blue-500" />
                 {employeeData.phone || "+91 1234567890"}
               </p>
               <p className="flex items-center text-gray-600">
-                <FaLocationDot className="mr-2 text-purple-500" />
+                <FaLocationDot className="mr-2 text-blue-500" />
                 {employeeData.location || "Mumbai, India"}
               </p>
 
@@ -74,7 +74,7 @@ const ProfileCard = ({ employeeData = {} }) => {
             </div>
           </div>
 
-          <button className="mt-6 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-full hover:from-blue-600 hover:to-purple-700 transition duration-300 ease-in-out">
+          <button className="mt-6 bg-blue-500 text-white px-4 py-2 rounded-full hover:from-blue-600 hover:to-purple-700 transition duration-300 ease-in-out">
             Show more details
           </button>
         </div>

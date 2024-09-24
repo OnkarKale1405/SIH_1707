@@ -32,7 +32,7 @@ const Attendance = () => {
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
                 <div className="flex flex-col justify-between items-center">
                     {/* Month and Year */}
-                    <div className="w-full h-16 px-4 py-2 text-white text-center text-xl font-bold flex justify-between items-center bg-gradient-to-r from-blue-500 to-purple-600">
+                    <div className="w-full h-16 px-4 py-2 text-white text-center text-xl font-bold flex justify-between items-center bg-blue-500">
                         <MdKeyboardArrowLeft className="cursor-pointer text-2xl" onClick={() => changeMonth(-1)} />
                         <div className="flex items-center gap-2 cursor-pointer" onClick={openCalendar}>
                             <FaCalendarAlt />
@@ -85,13 +85,13 @@ const AttendanceRow = ({ row }) => {
     const getDateColor = () => {
         switch (row.status) {
             case 'late': return 'text-red-500';
-            case 'weekend': return 'text-purple-500';
+            case 'weekend': return 'text-blue-900';
             default: return 'text-blue-500';
         }
     };
 
     return (
-        <div className={`grid grid-cols-4 gap-2 px-4 py-3 text-sm border-b ${row.status === 'weekend' ? 'bg-purple-50' : ''}`} style={{ whiteSpace: 'nowrap' }}>
+        <div className={`grid grid-cols-4 gap-2 px-4 py-3 text-sm border-b ${row.status === 'weekend' ? 'bg-blue-100' : ''}`} style={{ whiteSpace: 'nowrap' }}>
             <div className={getDateColor()}>{row.date}</div>
             <div className="text-gray-800">{row.clockIn}</div>
             <div className="text-gray-800">{row.clockOut}</div>

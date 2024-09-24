@@ -28,7 +28,7 @@ const Sidebar = () => {
                     <NavLink
                         to="/dashboards/admin"
                         className={({ isActive }) =>
-                            `menu-NavLink d-flex justify-content-between align-items-center mx-2 px-2 py-3 rounded-lg ${isActive ? 'bg-[#5283E1] text-white' : 'bg-white hover:bg-[#E7E7FF]'}`
+                            `menu-NavLink d-flex justify-content-between align-items-center mx-2 px-2 py-3 rounded-lg ${isActive ? 'bg-blue-600 text-white' : 'bg-white hover:bg-[#E7E7FF]'}`
                         }
                         style={{ color: 'inherit' }}
                     >
@@ -41,9 +41,9 @@ const Sidebar = () => {
                 </li>
                 <li className="menu-item">
                     <NavLink
-                        to="/dashboards/employee"
+                        to="/dashboards/employee-list"
                         className={({ isActive }) =>
-                            `menu-NavLink d-flex justify-content-between align-items-center mx-2 px-2 py-3 rounded-lg ${isActive ? 'bg-[#5283E1] text-white' : 'bg-white hover:bg-[#E7E7FF]'}`
+                            `menu-NavLink d-flex justify-content-between align-items-center mx-2 px-2 py-3 rounded-lg ${isActive ? 'bg-blue-600 text-white' : 'bg-white hover:bg-[#E7E7FF]'}`
                         }
                         style={{ color: 'inherit' }}
                     >

@@ -28,7 +28,7 @@ class WorkingHoursChart extends React.Component {
                         distributed: true,
                     }
                 },
-                colors: ['url(#blue-purple-gradient)'], // Use only the blue-purple gradient
+                colors: ['#3b82f6'], // Solid blue color
                 dataLabels: {
                     enabled: false,
                 },
@@ -104,18 +104,6 @@ class WorkingHoursChart extends React.Component {
                         type="bar"
                         height={300}
                     />
-                    <svg style={{ height: 0 }}>
-                        <defs>
-                            <linearGradient id="blue-purple-gradient" x1="0%" y1="100%" x2="0%" y2="0%">
-                                <stop offset="0%" stopColor="#3b82f6" />
-                                <stop offset="100%" stopColor="#a855f7" />
-                            </linearGradient>
-                            <linearGradient id="red-gradient" x1="0%" y1="100%" x2="0%" y2="0%">
-                                <stop offset="0%" stopColor="#ef4444" />
-                                <stop offset="100%" stopColor="#f87171" />
-                            </linearGradient>
-                        </defs>
-                    </svg>
                 </div>
             </div>
         );

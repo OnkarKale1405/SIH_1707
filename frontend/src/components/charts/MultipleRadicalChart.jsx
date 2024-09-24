@@ -30,7 +30,8 @@ const MultipleRadialChart = () => {
         },
       },
     },
-    colors: ['#3498db', '#8e44ad', '#9b59b6', '#2980b9'],
+    // Use shades of blue
+    colors: ['#1E90FF', '#00BFFF', '#4682B4', '#5F9EA0'],
     labels: ['Team A', 'Team B', 'Team C', 'Team D'],
     stroke: {
       lineCap: 'round',
@@ -41,21 +42,20 @@ const MultipleRadialChart = () => {
         shade: 'dark',
         type: 'horizontal',
         shadeIntensity: 0.5,
-        gradientToColors: ['#8e44ad', '#9b59b6', '#2980b9', '#3498db'],
+        // Gradient colors using shades of blue
+        gradientToColors: ['#1E90FF', '#00BFFF', '#4682B4', '#5F9EA0'],
         inverseColors: true,
         opacityFrom: 1,
         opacityTo: 1,
-        stops: [0, 100]
-      }
+        stops: [0, 100],
+      },
     },
   });
 
   return (
-    // <div className="bg-white rounded-lg shadow-md p-4">
-      <div id="chart">
-        <ReactApexChart options={options} series={series} type="radialBar" height={350} />
-      </div>
-    // </div>
+    <div id="chart">
+      <ReactApexChart options={options} series={series} type="radialBar" height={350} />
+    </div>
   );
 };
 
