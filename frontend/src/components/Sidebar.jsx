@@ -1,9 +1,12 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { CiUser } from "react-icons/ci";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { IoIosArrowForward } from "react-icons/io";
 import { FaFingerprint } from 'react-icons/fa';
+import { FaUser } from 'react-icons/fa'; 
+import { FaPlus } from "react-icons/fa";
+
 
 const Sidebar = () => {
     return (
@@ -28,7 +31,7 @@ const Sidebar = () => {
                     <NavLink
                         to="/dashboards/admin"
                         className={({ isActive }) =>
-                            `menu-NavLink d-flex justify-content-between align-items-center mx-2 px-2 py-3 rounded-lg ${isActive ? 'bg-blue-600 text-white' : 'bg-white hover:bg-[#E7E7FF]'}`
+                            `menu-NavLink d-flex justify-content-between align-items-center mx-2 px-2 py-3 rounded-lg ${isActive ? 'bg-blue-600 text-white' : 'bg-white hover:bg-[#E7E7FF]'}` 
                         }
                         style={{ color: 'inherit' }}
                     >
@@ -43,21 +46,36 @@ const Sidebar = () => {
                     <NavLink
                         to="/dashboards/employee-list"
                         className={({ isActive }) =>
-                            `menu-NavLink d-flex justify-content-between align-items-center mx-2 px-2 py-3 rounded-lg ${isActive ? 'bg-blue-600 text-white' : 'bg-white hover:bg-[#E7E7FF]'}`
+                            `menu-NavLink d-flex justify-content-between align-items-center mx-2 px-2 py-3 rounded-lg ${isActive ? 'bg-blue-600 text-white' : 'bg-white hover:bg-[#E7E7FF]'}` 
                         }
                         style={{ color: 'inherit' }}
                     >
                         <div className='flex gap-2'>
-                            <CiUser className='text-xl' />
+                            <FaUser size={20} className='text-xl' />
                             <div className="text-truncate" data-i18n="Dashboards">Employee Details</div>
                         </div>
                         <IoIosArrowForward />
                     </NavLink>
                 </li>
-
+              
+                <li className="menu-item">
+                    <NavLink
+                        to="/dashboards/add-employee"
+                        className={({ isActive }) =>
+                            `menu-NavLink d-flex justify-content-between align-items-center mx-2 px-2 py-3 rounded-lg ${isActive ? 'bg-blue-600 text-white' : 'bg-white hover:bg-[#E7E7FF]'}` 
+                        }
+                        style={{ color: 'inherit' }}
+                    >
+                        <div className='flex gap-2'>
+                            <FaPlus size={20} className='text-xl' />
+                            <div className="text-truncate" data-i18n="Dashboards">Add Employee</div>
+                        </div>
+                        <IoIosArrowForward />
+                    </NavLink>
+                </li>
             </ul>
-        </aside >
-    )
-}
+        </aside>
+    );
+};
 
-export default Sidebar
+export default Sidebar;

@@ -12,6 +12,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import EmployeeList from "./pages/EmployeeList"; // Corrected path
 import ForgotPassword from "./pages/ForgotPassword";
 import SideBarLayout from "./Layout/SideBarLayout";
+import AddEmployeeForm from "./pages/AddEmployeeForm";
 
 function App() {
   return (
@@ -21,10 +22,10 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/dashboards" element={<SideBarLayout />}>
-          {/* Use this for employee dashboard regardless of which employee is clicked */}
           <Route path="employee" element={<EmployeeDashboard />} />
           <Route path="admin" element={<AdminDashboard />} />
           <Route path="employee-list" element={<EmployeeList />} />
+          <Route path="add-employee" element={<AddEmployeeForm />} />
         </Route>
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>

@@ -24,7 +24,7 @@ const EmployeeList = () => {
   };
 
   return (
-    <div className="container py-4 bg-white text-blue-500">
+    <div className="container py-4 bg-gray-100 text-blue-500">
       <table className="w-full border-collapse h-50">
         <thead>
           <tr className="bg-blue-100">

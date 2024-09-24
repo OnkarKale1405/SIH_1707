@@ -9,7 +9,7 @@ const Navbar = () => {
 
     return (
         <nav
-            className="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            className="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-white"
             id="layout-navbar">
             {/* <div className="layout-menu-toggle navbar-nav align-items-xl-center me-4 me-xl-0 d-xl-none">
                 <a className="nav-item nav-link px-0 me-xl-6" href="javascript:void(0)">
