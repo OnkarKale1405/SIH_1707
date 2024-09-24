@@ -9,7 +9,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import EmployeeDashboard from "./pages/EmployeeDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
-import EmployeeList from "./pages/EmployeeList"; // Corrected path
+import EmployeeList from "./pages/EmployeeList";
 import ForgotPassword from "./pages/ForgotPassword";
 import SideBarLayout from "./Layout/SideBarLayout";
 import AddEmployeeForm from "./pages/AddEmployeeForm";
