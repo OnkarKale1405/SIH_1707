@@ -11,7 +11,7 @@ import EmployeeDashboard from "./pages/EmployeeDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import EmployeeList from "./pages/EmployeeList";
 import ForgotPassword from "./pages/ForgotPassword";
-import SideBarLayout from "./Layout/SideBarLayout.js";
+import SideBarLayout from "./Layout/SideBArLayout.js";
 import AddEmployeeForm from "./pages/AddEmployeeForm";
 
 function App() {
